@@ -14,7 +14,6 @@ document.addEventListener('scroll', () => {
   }
 })
 
-
 //2.TODO: Handle scrolling when tapping on the navbar menu
 const navbarMenu = document.querySelector('.navbar__menu');
 navbarMenu.addEventListener('click', (event) => {
@@ -24,8 +23,16 @@ navbarMenu.addEventListener('click', (event) => {
     return;
   } 
 
-  const scrollTo = document.querySelector(link);
-  scrollTo.scrollIntoView({behavior: "smooth"});
-
-
+  scrollIntoView(link);
 })
+
+//3.TODO: Handle scrolling when tapping "Contact me"
+const homeContactBtn = document.querySelector('.home__contact');
+homeContactBtn.addEventListener('click', (event) => {
+  scrollIntoView("#contact");
+})
+
+function scrollIntoView(selector) {
+  const scrollTo = document.querySelector(selector);
+  scrollTo.scrollIntoView({behavior: "smooth"});
+}
