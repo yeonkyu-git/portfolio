@@ -59,6 +59,42 @@ arrowUp.addEventListener('click', () => {
   scrollIntoView("#home");
 })
 
+//7.TODO: Sepcify Project when click the project category menu
+const workBtnContainer = document.querySelector('.work__categories');
+const projectContainer = document.querySelector('.work__projects');
+const projects = document.querySelectorAll('.project');
+const workBtns = document.querySelectorAll('.category__btn');
+
+workBtnContainer.addEventListener('click', (event) => {
+  const filter = event.target.dataset.filter || event.target.parentNode.dataset.filter;  // 콘솔 창에서 source에서 디버깅하면서 찾음
+  if (filter == null) {
+    return;
+  }
+
+  projectContainer.classList.add('anim-out');
+
+  // 블럭안에 있는 애들은 0.3초 후에 실행된다. 
+  setTimeout(() => {
+    projects.forEach((project) => {
+      // work project 보이게 안보이게 하기 
+      if (filter === '*' || filter === project.dataset.type) {
+        project.classList.remove('invisible');
+      } else {
+        project.classList.add('invisible');
+      }
+    })
+    projectContainer.classList.remove('anim-out');
+    },300)
+    
+  // Button Active 제거 및 추가 
+  workBtns.forEach((button) => {
+    if (button.dataset.filter === filter) {
+      button.classList.add('active');
+    } else {
+      button.classList.remove('active');
+    }
+  })
+})
 
 
 // Function: Scroll to specific element 
