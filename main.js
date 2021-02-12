@@ -16,12 +16,23 @@ document.addEventListener('scroll', () => {
 
 //2.TODO: Handle scrolling when tapping on the navbar menu
 const navbarMenu = document.querySelector('.navbar__menu');
+// const navbarMenuItems = document.querySelectorAll('.navbar__menu__item');
+
 navbarMenu.addEventListener('click', (event) => {
   const target = event.target;
   const link = target.dataset.link;
   if(link == null) {
     return;
   } 
+
+  // // 선택한 버튼에 active 주기 __ css에서 적용 안함 
+  // navbarMenuItems.forEach((item) => {
+  //   if (item.dataset.link === link) {
+  //     item.classList.add('active');
+  //   } else {
+  //     item.classList.remove('active');
+  //   }
+  // })
 
   scrollIntoView(link);
 })
@@ -71,8 +82,17 @@ workBtnContainer.addEventListener('click', (event) => {
     return;
   }
 
-  projectContainer.classList.add('anim-out');
 
+  // Remove selection from the previous item and select the new one 
+  const active = document.querySelector('.category__btn.selected');
+  active.classList.remove('selected');
+  const target = event.target.nodeName === 'BUTTON' ? event.target : event.target.parentNode;  // span 클릭하면 안되던거 해결
+  target.classList.add('selected');
+
+  console.log(event);
+
+
+  projectContainer.classList.add('anim-out');
   // 블럭안에 있는 애들은 0.3초 후에 실행된다. 
   setTimeout(() => {
     projects.forEach((project) => {
@@ -86,14 +106,14 @@ workBtnContainer.addEventListener('click', (event) => {
     projectContainer.classList.remove('anim-out');
     },300)
     
-  // Button Active 제거 및 추가 
-  workBtns.forEach((button) => {
-    if (button.dataset.filter === filter) {
-      button.classList.add('active');
-    } else {
-      button.classList.remove('active');
-    }
-  })
+  // // Button Active 제거 및 추가 
+  // workBtns.forEach((button) => {
+  //   if (button.dataset.filter === filter) {
+  //     button.classList.add('active');
+  //   } else {
+  //     button.classList.remove('active');
+  //   }
+  // })
 })
 
 
