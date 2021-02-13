@@ -4,13 +4,16 @@
 //1.TODO: Make navbar transparent when it is in the top
 const navbar = document.querySelector('#navbar');
 const navbarHeight = navbar.getBoundingClientRect().height;  // Element 의 요소 반환 
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
 
 document.addEventListener('scroll', () => {
 
   if(window.scrollY > navbarHeight) {
     navbar.classList.add('navbar--dark');
+    navbarToggleBtn.classList.add('movePosition');
   } else {
     navbar.classList.remove('navbar--dark');
+    navbarToggleBtn.classList.remove('movePosition');
   }
 })
 
@@ -25,6 +28,9 @@ navbarMenu.addEventListener('click', (event) => {
     return;
   } 
 
+  navbarMenu.classList.remove('open');
+  scrollIntoView(link);
+
   // // 선택한 버튼에 active 주기 __ css에서 적용 안함 
   // navbarMenuItems.forEach((item) => {
   //   if (item.dataset.link === link) {
@@ -33,9 +39,19 @@ navbarMenu.addEventListener('click', (event) => {
   //     item.classList.remove('active');
   //   }
   // })
-
-  scrollIntoView(link);
 })
+
+
+//9. Navbar toggle button for small screen 
+// navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
+// navbarMenu = document.querySelector('.navbar__menu');
+// navbar = document.querySelector('#navbar');
+
+navbarToggleBtn.addEventListener('click', () => {
+  navbarMenu.classList.toggle('open');
+})
+
+
 
 //3.TODO: Handle scrolling when tapping "Contact me"
 const homeContactBtn = document.querySelector('.home__contact');
@@ -83,7 +99,7 @@ workBtnContainer.addEventListener('click', (event) => {
   }
 
 
-  // Remove selection from the previous item and select the new one 
+  //8. Remove selection from the previous item and select the new one 
   const active = document.querySelector('.category__btn.selected');
   active.classList.remove('selected');
   const target = event.target.nodeName === 'BUTTON' ? event.target : event.target.parentNode;  // span 클릭하면 안되던거 해결
@@ -115,6 +131,9 @@ workBtnContainer.addEventListener('click', (event) => {
   //   }
   // })
 })
+
+
+
 
 
 // Function: Scroll to specific element 
