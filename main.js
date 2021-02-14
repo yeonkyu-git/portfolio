@@ -105,8 +105,6 @@ workBtnContainer.addEventListener('click', (event) => {
   const target = event.target.nodeName === 'BUTTON' ? event.target : event.target.parentNode;  // span 클릭하면 안되던거 해결
   target.classList.add('selected');
 
-  console.log(event);
-
 
   projectContainer.classList.add('anim-out');
   // 블럭안에 있는 애들은 0.3초 후에 실행된다. 
